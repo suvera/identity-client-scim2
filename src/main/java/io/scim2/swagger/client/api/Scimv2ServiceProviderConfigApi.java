@@ -33,6 +33,7 @@ public class Scimv2ServiceProviderConfigApi extends Scimv2BaseApi {
 
     public Scimv2ServiceProviderConfigApi(ScimApiClient scimApiClient) {
         super(scimApiClient);
+        scimApiClient.setServicePath("/ServiceProviderConfig");
     }
 
     private Call getServiceProviderConfigValidateBeforeCall() throws ScimApiException {

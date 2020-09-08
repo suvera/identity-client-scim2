@@ -110,6 +110,8 @@ public class ScimApiClient {
 
     private HttpLoggingInterceptor loggingInterceptor;
     private String url;
+    private String servicePath;
+
 
     /*
      * Constructor for ScimApiClient
@@ -595,6 +597,48 @@ public class ScimApiClient {
     }
 
     /**
+     * Get read timeout (in milliseconds).
+     *
+     * @return Timeout in milliseconds
+     */
+    public int getReadTimeout() {
+        return httpClient.getReadTimeout();
+    }
+
+    /**
+     * Sets the read timeout (in milliseconds).
+     * A value of 0 means no read, otherwise values must be between 1 and
+     *
+     * @param connectionTimeout read timeout in milliseconds
+     * @return Api client
+     */
+    public ScimApiClient setReadTimeout(int connectionTimeout) {
+        httpClient.setReadTimeout(connectionTimeout, TimeUnit.MILLISECONDS);
+        return this;
+    }
+
+    /**
+     * Get write timeout (in milliseconds).
+     *
+     * @return Timeout in milliseconds
+     */
+    public int getWriteTimeout() {
+        return httpClient.getWriteTimeout();
+    }
+
+    /**
+     * Sets the write timeout (in milliseconds).
+     * A value of 0 means no write, otherwise values must be between 1 and
+     *
+     * @param connectionTimeout write timeout in milliseconds
+     * @return Api client
+     */
+    public ScimApiClient setWriteTimeout(int connectionTimeout) {
+        httpClient.setWriteTimeout(connectionTimeout, TimeUnit.MILLISECONDS);
+        return this;
+    }
+
+    /**
      * Format the given parameter object into string.
      *
      * @param param Parameter
@@ -1006,6 +1050,18 @@ public class ScimApiClient {
         this.url = url;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public String getServicePath() {
+        return servicePath;
+    }
+
+    public void setServicePath(String servicePath) {
+        this.servicePath = servicePath;
+    }
+
     /**
      * Build an HTTP request with the given options.
      *
@@ -1023,6 +1079,9 @@ public class ScimApiClient {
 
         updateParamsForAuth(authNames, queryParams, headerParams);
         String path = this.url;
+        if (servicePath != null) {
+            path += servicePath;
+        }
         final String url = buildUrl(path, queryParams);
         final Request.Builder reqBuilder = new Request.Builder().url(url);
         processHeaderParams(headerParams, reqBuilder);
