@@ -316,11 +316,48 @@ public class Scimv2GroupsApi extends Scimv2BaseApi {
         return scimApiClient.execute(call, localVarReturnType);
     }
 
-    private Call updateGroupValidateBeforeCall(List<String> attributes, List<String> excludedAttributes, String body)
+    private Call updateGroupValidateBeforeCall(List<String> attributes, List<String> excludedAttributes
+            , String body, String httpMethod)
             throws ScimApiException {
 
-        Call call = updateResourceCall(attributes, excludedAttributes, body);
+        Call call = updateGroupCall(attributes, excludedAttributes, body, httpMethod);
         return call;
+    }
+
+    /**
+     * Build call for updateUser.
+     *
+     * @param attributes         SCIM defined attributes parameter. (optional)
+     * @param excludedAttributes SCIM defined excludedAttribute parameter. (optional)
+     * @param body               (optional)
+     * @return Call to execute
+     * @throws ScimApiException If fail to serialize the request body object
+     */
+    public Call updateGroupCall(List<String> attributes, List<String> excludedAttributes
+            , String body, String httpMethod)
+            throws ScimApiException {
+
+        Object localVarPostBody = body;
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        if (attributes != null)
+            localVarQueryParams.addAll(scimApiClient.parameterToPairs("csv", "attributes",
+                    attributes));
+        if (excludedAttributes != null)
+            localVarQueryParams.addAll(scimApiClient.parameterToPairs("csv", "excludedAttributes",
+                    excludedAttributes));
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+        final String[] localVarAccepts = {"application/json", "application/scim+json"};
+        final String localVarAccept = scimApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {"application/scim+json"};
+        final String localVarContentType = scimApiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+        String[] localVarAuthNames = new String[]{"basicAuth"};
+        return scimApiClient.buildCall(httpMethod, localVarQueryParams, localVarPostBody, localVarHeaderParams,
+                localVarFormParams, localVarAuthNames);
     }
 
     /**
@@ -333,9 +370,10 @@ public class Scimv2GroupsApi extends Scimv2BaseApi {
      * @return String
      * @throws ScimApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ScimApiResponse<String> updateGroup(List<String> attributes, List<String> excludedAttributes, String body)
+    public ScimApiResponse<String> updateGroup(List<String> attributes, List<String> excludedAttributes
+            , String body, String httpMethod)
             throws ScimApiException {
-        ScimApiResponse<String> resp = updateGroupWithHttpInfo(attributes, excludedAttributes, body);
+        ScimApiResponse<String> resp = updateGroupWithHttpInfo(attributes, excludedAttributes, body, httpMethod);
         return resp;
     }
 
@@ -350,8 +388,8 @@ public class Scimv2GroupsApi extends Scimv2BaseApi {
      * @throws ScimApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public ScimApiResponse<String> updateGroupWithHttpInfo(List<String> attributes, List<String> excludedAttributes,
-                                                           String body) throws ScimApiException {
-        Call call = updateGroupValidateBeforeCall(attributes, excludedAttributes, body);
+                                                           String body, String httpMethod) throws ScimApiException {
+        Call call = updateGroupValidateBeforeCall(attributes, excludedAttributes, body, httpMethod);
         Type localVarReturnType = new TypeToken<String>() {}.getType();
         return scimApiClient.execute(call, localVarReturnType);
     }

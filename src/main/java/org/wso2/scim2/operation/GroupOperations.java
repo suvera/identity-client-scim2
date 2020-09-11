@@ -153,7 +153,7 @@ public class GroupOperations extends AbstractOperations {
                 String encodedGroup = scimClient.encodeSCIMObject((AbstractSCIMObject) scimObject, SCIMConstants.JSON);
                 client.setURL(groupEPURL + "/" + groupId);
                 Scimv2GroupsApi api = new Scimv2GroupsApi(client);
-                ScimApiResponse<String> response = api.updateGroup(null, null, encodedGroup);
+                ScimApiResponse<String> response = api.updateGroup(null, null, encodedGroup, "PUT");
                 logger.info("SCIM - update group operation returned with response code: " + response.getStatusCode());
                 if (logger.isDebugEnabled()) {
                     logger.debug("Update Group Response: " + response.getData());
