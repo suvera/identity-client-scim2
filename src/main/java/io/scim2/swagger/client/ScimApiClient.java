@@ -118,7 +118,11 @@ public class ScimApiClient {
      */
     public ScimApiClient() {
         httpClient = new OkHttpClient();
-        verifyingSsl = true;
+        try {
+            setVerifyingSsl(false);
+        } catch (ScimApiException e) {
+            throw new RuntimeException(e);
+        }
         json = new JSON(this);
 
         /*
