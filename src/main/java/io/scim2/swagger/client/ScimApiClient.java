@@ -88,7 +88,7 @@ public class ScimApiClient {
     private final String urlEncodedContentType = "application/x-www-form-urlencoded";
     private final String multiparFormDataContentType = "multipart/form-data";
     private final String octetStreamContentType = "application/octet-stream";
-    private final String jsonContentType = "application/json";
+    private final String jsonContentType = "application/scim+json";
     private boolean lenientOnJson = false;
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();

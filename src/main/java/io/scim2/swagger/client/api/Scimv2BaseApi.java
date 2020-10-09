@@ -72,9 +72,7 @@ public class Scimv2BaseApi {
         final String localVarAccept = scimApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
 
-        final String[] localVarContentTypes = {"application/scim+json"};
-        final String localVarContentType = scimApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        localVarHeaderParams.put("Content-Type", "application/scim+json");
 
         String[] localVarAuthNames = new String[]{"basicAuth"};
         return scimApiClient.buildCall("POST", localVarQueryParams, localVarPostBody, localVarHeaderParams,
